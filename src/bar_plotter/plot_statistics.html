@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="plotly-latest.min.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="debug_plotable.js"></script>
+    <style>
+        #myDiv 
+        {
+            margin: 0 auto;
+            border: 1px solid black;
+            height: 85vh;
+            min-height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="chart_div"></div>
+<script>
+
+    var trace = plotable_input;
+    let color_markers = [];
+    for(let i = 0; i < trace.y.length; ++i )
+    {
+        color_markers[i] = trace.y[i] > 20 ? "#ea0000" : (trace.y[i] >= 15 ? "#d16640" : ( trace.y[i] > 10 ? "#efdb21" : "#55c170") );
+    }
+    trace.marker = { color: color_markers, line: { color: "#ddd", width: 1 } };
+    console.log(trace);
+
+    var data = [ trace ];
+
+    var layout = { 
+    title: 'Title',
+    font: {size: 18}
+    };
+
+    Plotly.newPlot('chart_div', data, layout, {responsive: true});
+</script>
+</body>
+</html>
